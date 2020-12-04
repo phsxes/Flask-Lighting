@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-venv/
+env/
 __pycache__/
 node_modules/
-=======
 venv/
-__pycache__/
->>>>>>> b0319b89e8bfde0ce04883f76d233ade4cb3336b
