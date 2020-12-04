@@ -1,20 +1,114 @@
+<!DOCTYPE html>
 <html>
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}">
-  <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Light Control Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+      html, body {
+        margin: 0;
+        height: 100%;
+        width: 100%;
+        background: #8A2387;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #F27121, #E94057, #8A2387);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #F27121, #E94057, #8A2387); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      }
+
+      .container{
+        width: 100%;
+        height: 95%;
+      }
+
+      .is-ancestor{
+        height: 100%;
+      }
+
+      .navbar{
+        background: transparent;
+      }
+      .navbar-item{
+        color: #fff;
+      }
+    </style>
   </head>
   <body>
-    <div id="picker"></div>
-    <script>
-        var colorPicker = new iro.ColorPicker("#picker", {
-        // Set the size of the color picker
-        width: 320,
-        // Set the initial color to pure red
-        color: "#f00"
-        });
-        colorPicker.on('color:change', function(color) {
-        });
-    </script>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="https://bulma.io">
+          <img src="https://img.icons8.com/wired/64/000000/spiral-bulb.png"/>
+        </a>
+    
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+    
+      <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item has-text-weight-bold">
+            Inicio
+          </a>
+    
+          <a class="navbar-item has-text-weight-bold">
+            Gráficas
+          </a>
+    
+          <a class="navbar-item has-text-weight-bold">
+              Reportes
+          </a>
+        </div>
+      </div>
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+              <a class="button is-light">
+                Log in
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="tile is-ancestor">
+        <div class="tile is-vertical">
+          <div class="tile">
+            <div class="tile is-parent is-vertical is-6">
+              <article class="tile is-child box is-12">
+                <span class="is-large">
+                  La iluminación se encuentra:<b>Apagada</b>.
+                </span>
+              </article>
+              <article class="tile is-child box is-12">
+                <div class="columns is-centered mt-4" id="picker">
+                  <script>
+                      var colorPicker = new iro.ColorPicker("#picker", {
+                        borderWidth: 3,
+                        borderColor: "#000"
+                      });
+                      colorPicker.on('color:change', function(color) {
+                      });
+                  </script>
+                </div>
+                <div class="has-text-centered">
+                  <button class="button is-rounded is-dark mt-4">Seleccionar color</button>
+                </div>
+              </article>
+              <article class="tile is-child box is-12">
+              </article>
+            </div>
+            <div class="tile is-parent is-6">
+              <article class="tile is-child box is-12">
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

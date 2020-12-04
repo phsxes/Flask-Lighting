@@ -1,0 +1,19 @@
+{
+  "name": "dependencies",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "css-build": "node-sass --omit-source-map-url sass/mystyles.scss css/mystyles.css",
+    "css-watch": "npm run css-build -- --watch",
+    "start": "npm run css-watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "keywords": [],
+  "description": "",
+  "dependencies": {
+    "bulma": "^0.9.1",
+    "node-sass": "^5.0.0"
+  }
+}
