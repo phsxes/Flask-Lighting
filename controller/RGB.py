@@ -6,6 +6,8 @@ from datetime import datetime
 import paho.mqtt.client as mqtt
 import threading
 
+
+# Initial variables
 ORDER = neopixel.GRB
 num_pixels = 15
 pixels = neopixel.NeoPixel(board.D18, num_pixels)
@@ -13,8 +15,8 @@ type = "static"
 current_static = (255,255,255)
 
 
-
-def doit(arg):
+# Thread running the visual effects continously while the other code executes
+def effects():
     global type
     global current_static
     t = threading.currentThread()
@@ -28,7 +30,7 @@ def doit(arg):
         elif type == "cylon":
             theaterChase(current_static)
 
-t = threading.Thread(target=doit, args=("task",))
+t = threading.Thread(target=effects, args=())
 t.start()
 
 
@@ -51,6 +53,7 @@ def theaterChase(color, wait_ms=150, iterations=10):
 
 ##############################
 
+
 ######## COLOR WIPE  #########
 
 def colorWipe(color, wait_ms=75):
@@ -65,6 +68,7 @@ def colorWipe(color, wait_ms=75):
             return
         pixels[i] = (0,0,0)
         time.sleep(wait_ms/1000.0)
+
 ##############################
 
 
@@ -72,9 +76,6 @@ def colorWipe(color, wait_ms=75):
 
 
 def wheel(pos):
-# Input a value 0 to 255 to get a color value.
-# The colours are a transition r - g - b - back to r.
-
     if pos < 0 or pos > 255:
         r = g = b = 0
     elif pos < 85:
@@ -141,17 +142,18 @@ def on_message(client, userdata, msg):
         pass
 
 
+# Main configuration
 client = mqtt.Client()
 client.on_connect = on_connect
 client.on_message = on_message
 
-client.connect("207.246.102.184", 1883, 60)
-client.username_pw_set("light_project", "raspberrypi")
+client.connect("", 1883, 60)
+client.username_pw_set("", "")
 pixels.fill((0,0,0))
 pixels.show()
 client.loop_start()
 
-
+# Infinite loop (reporting state and publishing to topic)
 while True:
     report = datetime.now()
     dt_string = report.strftime("%d/%m/%Y %H:%M:%S")
